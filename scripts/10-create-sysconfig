@@ -1,0 +1,83 @@
+#! /bin/bash
+
+#
+# This script creates the initial sysconfig if not present
+#
+
+# For testing
+#oldconfig="sysinfo.txt"
+#newconfig="sysconfig.json"
+
+oldconfig="/etc/opi/sysinfo.conf"
+newconfig="/etc/kinguard/sysconfig.json"
+
+
+if [ -e $newconfig ]
+then
+	echo "Sysconfig already created, terminating"
+	exit
+fi
+
+if [ ! -e $oldconfig ]
+then
+	echo "Original config not present, terminating"
+	exit
+fi
+
+function vod()
+{
+	value=$1
+	default=$2
+
+	rval=$(sed -n "s/$value=\(.*\)$/\1/ p" <$oldconfig)
+	if [  "x$rval" = "x" ]
+	then
+		rval="$default"
+	fi
+
+	printf -v $value "$rval"
+}
+
+vod "dnsauthkey" 	"/etc/opi/dnspriv.pem"
+vod "unit_id" 		""
+vod "ca_path" 		""
+vod "opi_name" 		""
+vod "domain" 		""
+vod "sys_key" 		""
+vod "dns_key" 		""
+vod "dnsenabled"	"true"
+
+#Fixup for dns
+if [ $dnsenabled -eq 1 ]
+then
+	dnsenabled="true"
+fi
+
+read -d '' template << EOF
+{
+   "dns" : {
+      "dnsauthkey" : "$dns_key",
+      "enabled" : $dnsenabled,
+      "dnspubkey" : "/etc/opi/dnspub.pem"
+   },
+   "hostinfo" : {
+      "unitid" : "$unit_id",
+      "cafile" : "$ca_path",
+      "hostname" : "$opi_name",
+      "domain" : "$domain",
+      "sysauthkey" : "$sys_key",
+      "syspubkey" : "/var/opi/etc/syspub.pem"
+   },
+   "webcertificate" : {
+      "activecert" : "/etc/opi/web_cert.pem",
+      "activekey" : "/etc/opi/web_key.pem",
+      "defaultcert" : "/etc/opi/opi.cert",
+      "defaultkey" : "/etc/opi/dnspriv.pem"
+   },
+   "backup" : {
+      "devicemountpath" : "/mnt/usb",
+   }
+}
+EOF
+
+echo "$template" > $newconfig

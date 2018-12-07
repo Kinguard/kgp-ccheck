@@ -1,0 +1,17 @@
+Source: kgp-ccheck
+Section: admin
+Priority: standard
+Maintainer: Tor Krill <tor@openproducts.se>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 4.1.2
+Homepage: https://www.kinguardproject.org
+#Vcs-Git: https://github.com/Kinguard/kgp-ccheck.git
+#Vcs-Browser: https://github.com/Kinguard/kgp-ccheck
+
+Package: kgp-ccheck
+Architecture: all
+Depends: ${misc:Depends}
+Description: Kinguardproject consistency check 
+ Packages relying on specific configuration or similar should
+ pre-depend on kgp-ccheck specific version. Kgp-ccheck makes sure that 
+ these preconditions are satisfied.
