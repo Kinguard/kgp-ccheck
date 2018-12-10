@@ -1,0 +1,6 @@
+#! /bin/bash
+
+if [ ! -d /var/opi/tmp ]; then
+	mkdir -p /var/opi/tmp
+	chmod a+w /var/opi/tmp
+fi

@@ -1,0 +1,28 @@
+#! /bin/bash
+
+KGP=/usr/sbin/kgp-sysinfo
+
+if [ ! -x $KGP ]
+then
+	echo "Patch sysinfo, no kgp-sysinfo executable. Terminating."
+	exit 0
+fi
+
+kgp_set()
+{
+	if ! $KGP -q -c $1 -k $2
+	then
+		echo "Adding [$1] [$2] as [$3]"
+		$KGP -c $1 -k $2 -w $3
+	else
+		echo "[$1] [$2] already exists, not adding"
+	fi
+}
+
+kgp_set webcertificate activecert "/etc/opi/web_cert.pem"
+kgp_set webcertificate activekey "/etc/opi/web_key.pem"
+kgp_set webcertificate defaultkey "/etc/opi/dnspriv.pem"
+kgp_set webcertificate defaultcert "/etc/opi/opi.cert"
+
+kgp_set backup devicemountpath "/mnt/usb"
+
