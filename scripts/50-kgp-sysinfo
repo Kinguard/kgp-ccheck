@@ -2,9 +2,18 @@
 
 KGP=/usr/sbin/kgp-sysinfo
 
+# Check existence
 if [ ! -x $KGP ]
 then
 	echo "Patch sysinfo, no kgp-sysinfo executable. Terminating."
+	exit 0
+fi
+
+# Check version, we need 1.20 to have needed commands
+KGPV=$(dpkg-query -f='${Version}\n' --show kinguard-utils)
+if dpkg --compare-versions $KGPV le "1.20"
+then
+	echo "To old version of kgp-sysinfo, unable to patch. Terminating"
 	exit 0
 fi
 

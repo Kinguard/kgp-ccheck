@@ -55,29 +55,33 @@ fi
 
 read -d '' template << EOF
 {
-   "dns" : {
-      "dnsauthkey" : "$dns_key",
-      "enabled" : $dnsenabled,
-      "dnspubkey" : "/etc/opi/dnspub.pem"
-   },
-   "hostinfo" : {
-      "unitid" : "$unit_id",
-      "cafile" : "$ca_path",
-      "hostname" : "$opi_name",
-      "domain" : "$domain",
-      "sysauthkey" : "$sys_key",
-      "syspubkey" : "/var/opi/etc/syspub.pem"
-   },
-   "webcertificate" : {
-      "activecert" : "/etc/opi/web_cert.pem",
-      "activekey" : "/etc/opi/web_key.pem",
-      "defaultcert" : "/etc/opi/opi.cert",
-      "defaultkey" : "/etc/opi/dnspriv.pem"
-   },
-   "backup" : {
-      "devicemountpath" : "/mnt/usb",
-   }
+	"dns" : {
+		"dnsauthkey" : "$dns_key",
+		"enabled" : $dnsenabled,
+		"dnspubkey" : "/etc/opi/dnspub.pem"
+	},
+	"filesystem" : {
+		"storagemount" : "/var/opi/"
+	},
+	"hostinfo" : {
+		"unitid" : "$unit_id",
+		"cafile" : "$ca_path",
+		"hostname" : "$opi_name",
+		"domain" : "$domain",
+		"sysauthkey" : "$sys_key",
+		"syspubkey" : "/var/opi/etc/syspub.pem"
+	},
+	"webcertificate" : {
+		"activecert" : "/etc/opi/web_cert.pem",
+		"activekey" : "/etc/opi/web_key.pem",
+		"defaultcert" : "/etc/opi/opi.cert",
+		"defaultkey" : "/etc/opi/dnspriv.pem"
+	},
+	"backup" : {
+		"devicemountpath" : "/mnt/usb",
+	}
 }
 EOF
 
 echo "$template" > $newconfig
+mv "$oldconfig" "$oldconfig.sav"
