@@ -1,3 +1,10 @@
+kgp-ccheck (1.2) vili; urgency=medium
+
+  * Add version check to kgp-sysinfo patch
+  * Add storagemount config to sysconfig stansa
+
+ -- Tor Krill <tor@openproducts.se>  Tue, 11 Dec 2018 08:44:57 +0100
+
 kgp-ccheck (1.1) vili; urgency=medium
 
   * Add scripts to fix nc-install and patching sysinfo if needed
