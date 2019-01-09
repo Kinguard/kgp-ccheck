@@ -1,3 +1,10 @@
+kgp-ccheck (1.4) vili; urgency=medium
+
+  * Add fixes for wrong permission on /etc/opi (From opi-backup)
+  * Add fix to remove keep from mydestination in postfix
+
+ -- Tor Krill <tor@openproducts.se>  Wed, 09 Jan 2019 16:15:16 +0100
+
 kgp-ccheck (1.3) vili; urgency=medium
 
   * Fix faulty comparison in sysinfo patch script

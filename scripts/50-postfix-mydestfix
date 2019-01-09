@@ -1,0 +1,17 @@
+#! /bin/bash
+
+# Installer faulty added keep to mydestination #436
+# remove if exists
+
+if [ -e /etc/postfix/main.cf ] && [ -x /usr/sbin/postconf ]
+then
+
+	RE="^.*, keep,.*$"
+	MD=`postconf -h  mydestination`
+	if [[ $MD =~ $RE ]]
+	then
+		echo "Updating postconf removing keep from mydestination"
+		MD=`echo $MD | sed "s/ keep\,//"`
+		postconf -e "mydestination=$MD"
+	fi 
+fi
