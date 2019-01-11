@@ -1,3 +1,9 @@
+kgp-ccheck (1.5) vili; urgency=medium
+
+  * Add fixup for old roundcube static theming config
+
+ -- Tor Krill <tor@openproducts.se>  Fri, 11 Jan 2019 11:50:40 +0100
+
 kgp-ccheck (1.4) vili; urgency=medium
 
   * Add fixes for wrong permission on /etc/opi (From opi-backup)
