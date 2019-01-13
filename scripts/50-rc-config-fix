@@ -8,7 +8,6 @@ LINE="\$config['skin'] = \"kgp\";"
 CFG="\$config['skin'] = function_exists(\"getConfigValue\") \\&\\& getConfigValue(\"webapps\",\"theme\") ? getConfigValue(\"webapps\",\"theme\") : \"kgp\";"
 INCLUDE="include \"\/usr\/share\/kinguard-utils\/sysconfigWrapper.php\";"
 
-set -x
 if [ -e "$FIL" ]
 then
 	if grep -Fxq "$LINE" "$FIL"

@@ -1,3 +1,9 @@
+kgp-ccheck (1.7) vili; urgency=medium
+
+  * Remove 'set -x' from RC script. 
+
+ -- PA Nilsson <pa@openproducts.se>  Sun, 13 Jan 2019 10:54:47 +0100
+
 kgp-ccheck (1.6) vili; urgency=medium
 
   * Add php include file in RC config for sysconfig support. 
