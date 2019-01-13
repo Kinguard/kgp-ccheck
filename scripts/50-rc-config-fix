@@ -6,12 +6,17 @@ FIL="/usr/share/roundcube/config/config.inc.php"
 MATCH="\\\$config\\['skin'\\] = \"kgp\";"
 LINE="\$config['skin'] = \"kgp\";"
 CFG="\$config['skin'] = function_exists(\"getConfigValue\") \\&\\& getConfigValue(\"webapps\",\"theme\") ? getConfigValue(\"webapps\",\"theme\") : \"kgp\";"
+INCLUDE="include \"\/usr\/share\/kinguard-utils\/sysconfigWrapper.php\";"
 
+set -x
 if [ -e "$FIL" ]
 then
 	if grep -Fxq "$LINE" "$FIL"
 	then
 		sed -i.bak -e "s/$MATCH/$CFG/" "$FIL"
+		# add include directive on line 2, after "<?php" tag
+		sed -i "2s/^/${INCLUDE}\n/" "$FIL"
 	fi
+	
 fi
 

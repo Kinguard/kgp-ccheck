@@ -1,3 +1,9 @@
+kgp-ccheck (1.6) vili; urgency=medium
+
+  * Add php include file in RC config for sysconfig support. 
+
+ -- PA Nilsson <pa@openproducts.se>  Sun, 13 Jan 2019 10:51:31 +0100
+
 kgp-ccheck (1.5) vili; urgency=medium
 
   * Add fixup for old roundcube static theming config
