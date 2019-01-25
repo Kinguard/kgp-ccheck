@@ -43,12 +43,13 @@ vod "unit_id" 		""
 vod "ca_path" 		""
 vod "opi_name" 		""
 vod "domain" 		""
-vod "sys_key" 		""
-vod "dns_key" 		""
+vod "sys_key" 		"/var/opi/etc/syspriv.pem"
+vod "dns_key" 		"/etc/opi/dnspriv.pem"
 vod "dnsenabled"	"true"
 
 #Fixup for dns
-if [ $dnsenabled -eq 1 ]
+re='^[0-9]+$'
+if [[ $dnsenabled =~ $re ]] && [ $dnsenabled -eq 1 ]
 then
 	dnsenabled="true"
 fi
@@ -61,6 +62,10 @@ read -d '' template << EOF
 		"dnspubkey" : "/etc/opi/dnspub.pem"
 	},
 	"filesystem" : {
+		"luksdevice" : "/dev/mapper/opi",
+		"lvmdevice" : "/dev/pool/data",
+		"lvmlv" : "data",
+		"lvmvg" : "pool",
 		"storagemount" : "/var/opi/"
 	},
 	"hostinfo" : {
@@ -69,6 +74,7 @@ read -d '' template << EOF
 		"hostname" : "$opi_name",
 		"domain" : "$domain",
 		"sysauthkey" : "$sys_key",
+		"syscert" : "/etc/opi/opi.cert",
 		"syspubkey" : "/var/opi/etc/syspub.pem"
 	},
 	"webcertificate" : {
@@ -79,6 +85,17 @@ read -d '' template << EOF
 	},
 	"backup" : {
 		"devicemountpath" : "/mnt/usb",
+	},
+	"mail" : {
+		"localmail" : "/mail/conf/localmail",
+		"oprelayserver" : "op-mail.openproducts.com",
+		"saslpasswd" : "/mail/conf/sasl_passwd",
+		"vdomains" : "/mail/conf/domains",
+		"virtualalias" : "/mail/conf/virtual",
+		"vmailbox" : "/mail/conf/vmailbox"
+	},
+	"setup" : {
+		"conntesthost" : "http://conntest.op-i.me"
 	}
 }
 EOF

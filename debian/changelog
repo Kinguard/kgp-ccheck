@@ -1,3 +1,9 @@
+kgp-ccheck (1.9) vili; urgency=medium
+
+  * Update sysconfig template and fix dnscheck test
+
+ -- Tor Krill <tor@openproducts.se>  Fri, 25 Jan 2019 16:17:28 +0100
+
 kgp-ccheck (1.8) vili; urgency=medium
 
   * Update postfix config fix, hardcode mydestination
