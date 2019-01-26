@@ -106,8 +106,4 @@ read -d '' template << EOF
 EOF
 
 echo "$template" > $newconfig
-
-# Debug
-echo "$template" > /root/initial.syscfg
-
 mv "$oldconfig" "$oldconfig.sav"
