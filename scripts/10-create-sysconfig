@@ -8,6 +8,8 @@
 #oldconfig="sysinfo.txt"
 #newconfig="sysconfig.json"
 
+echo "Check if initial sysconfig setup is needed"
+
 oldconfig="/etc/opi/sysinfo.conf"
 newconfig="/etc/kinguard/sysconfig.json"
 
@@ -23,6 +25,8 @@ then
 	echo "Original config not present, terminating"
 	exit
 fi
+
+echo "Initial setup needed"
 
 function vod()
 {
@@ -51,6 +55,7 @@ vod "dnsenabled"	"true"
 re='^[0-9]+$'
 if [[ $dnsenabled =~ $re ]] && [ $dnsenabled -eq 1 ]
 then
+	echo "Doing dns config fixup"
 	dnsenabled="true"
 fi
 
@@ -84,7 +89,7 @@ read -d '' template << EOF
 		"defaultkey" : "/etc/opi/dnspriv.pem"
 	},
 	"backup" : {
-		"devicemountpath" : "/mnt/usb",
+		"devicemountpath" : "/mnt/usb"
 	},
 	"mail" : {
 		"localmail" : "/mail/conf/localmail",
@@ -101,4 +106,8 @@ read -d '' template << EOF
 EOF
 
 echo "$template" > $newconfig
+
+# Debug
+echo "$template" > /root/initial.syscfg
+
 mv "$oldconfig" "$oldconfig.sav"
