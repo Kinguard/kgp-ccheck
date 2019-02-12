@@ -1,7 +1,8 @@
 #! /bin/bash
 
 #
-# This script creates the initial sysconfig if not present
+# This script migrates from the eariler opi-sysinfo to
+# the newer kgp sysconfig
 #
 
 # For testing
@@ -26,7 +27,7 @@ then
 	exit
 fi
 
-echo "Initial setup needed"
+echo "Migrating opi sysinfo to kgp sysconfig"
 
 function vod()
 {
