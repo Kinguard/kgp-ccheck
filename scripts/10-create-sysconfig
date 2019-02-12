@@ -1,0 +1,69 @@
+#! /bin/bash
+
+#
+# This script creates the initial sysconfig if not present
+#
+
+echo "Check if initial sysconfig setup is needed"
+
+oldconfig="/etc/opi/sysinfo.conf"
+newconfig="/etc/kinguard/sysconfig.json"
+
+
+if [ -e $newconfig ]
+then
+	echo "KGP Sysconfig already created, terminating"
+	exit
+fi
+
+if [ -e $oldconfig ]
+then
+	echo "OPI sysinfo present migrate instead, terminating"
+	exit
+fi
+
+echo "Create initial sysconfig"
+
+read -d '' template << EOF
+{
+	"dns" : {
+		"dnsauthkey" : "/etc/opi/dnspriv.pem",
+		"enabled" : true,
+		"dnspubkey" : "/etc/opi/dnspub.pem"
+	},
+	"filesystem" : {
+		"luksdevice" : "/dev/mapper/opi",
+		"lvmdevice" : "/dev/pool/data",
+		"lvmlv" : "data",
+		"lvmvg" : "pool",
+		"storagemount" : "/var/opi/"
+	},
+	"hostinfo" : {
+		"sysauthkey" : "/var/opi/etc/syspriv.pem",
+		"syscert" : "/etc/opi/opi.cert",
+		"syspubkey" : "/var/opi/etc/syspub.pem"
+	},
+	"webcertificate" : {
+		"activecert" : "/etc/opi/web_cert.pem",
+		"activekey" : "/etc/opi/web_key.pem",
+		"defaultcert" : "/etc/opi/opi.cert",
+		"defaultkey" : "/etc/opi/dnspriv.pem"
+	},
+	"backup" : {
+		"devicemountpath" : "/mnt/usb"
+	},
+	"mail" : {
+		"localmail" : "/mail/conf/localmail",
+		"oprelayserver" : "op-mail.openproducts.com",
+		"saslpasswd" : "/mail/conf/sasl_passwd",
+		"vdomains" : "/mail/conf/domains",
+		"virtualalias" : "/mail/conf/virtual",
+		"vmailbox" : "/mail/conf/vmailbox"
+	},
+	"setup" : {
+		"conntesthost" : "http://conntest.op-i.me"
+	}
+}
+EOF
+
+echo "$template" > $newconfig

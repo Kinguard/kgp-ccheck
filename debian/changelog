@@ -1,3 +1,9 @@
+kgp-ccheck (1.12) vili; urgency=medium
+
+  * Add script to create initial sysconfig on new system
+
+ -- Tor Krill <tor@openproducts.se>  Tue, 12 Feb 2019 14:27:37 +0100
+
 kgp-ccheck (1.11) vili; urgency=medium
 
   * Remove left over debug in sysconf script
