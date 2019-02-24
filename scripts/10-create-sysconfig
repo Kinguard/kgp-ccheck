@@ -41,7 +41,8 @@ read -d '' template << EOF
 	"hostinfo" : {
 		"sysauthkey" : "/var/opi/etc/syspriv.pem",
 		"syscert" : "/etc/opi/opi.cert",
-		"syspubkey" : "/var/opi/etc/syspub.pem"
+		"syspubkey" : "/var/opi/etc/syspub.pem",
+		"cafile" : "/etc/opi/op_ca.pem"
 	},
 	"webcertificate" : {
 		"activecert" : "/etc/opi/web_cert.pem",

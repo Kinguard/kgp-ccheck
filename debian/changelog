@@ -1,3 +1,9 @@
+kgp-ccheck (1.13) vili; urgency=medium
+
+  * Add ca-file to sysconf generation script
+
+ -- Tor Krill <tor@openproducts.se>  Sun, 24 Feb 2019 22:01:02 +0100
+
 kgp-ccheck (1.12) vili; urgency=medium
 
   * Add script to create initial sysconfig on new system
