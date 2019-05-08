@@ -51,7 +51,8 @@ read -d '' template << EOF
 		"defaultkey" : "/etc/opi/dnspriv.pem"
 	},
 	"backup" : {
-		"devicemountpath" : "/mnt/usb"
+		"devicemountpath" : "/mnt/usb",
+		"enabled" : true
 	},
 	"mail" : {
 		"localmail" : "/mail/conf/localmail",
