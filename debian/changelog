@@ -1,4 +1,4 @@
-kgp-ccheck (1.14) UNRELEASED; urgency=medium
+kgp-ccheck (1.14) vili; urgency=medium
 
   * Add backup enabled to sysconf generation
 
