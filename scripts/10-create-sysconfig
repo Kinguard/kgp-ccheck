@@ -27,6 +27,8 @@ echo "Create initial sysconfig"
 read -d '' template << EOF
 {
 	"dns" : {
+		"availabledomains" : [],
+		"provider": "none",
 		"dnsauthkey" : "/etc/opi/dnspriv.pem",
 		"enabled" : false,
 		"dnspubkey" : "/etc/opi/dnspub.pem"
