@@ -28,7 +28,7 @@ read -d '' template << EOF
 {
 	"dns" : {
 		"dnsauthkey" : "/etc/opi/dnspriv.pem",
-		"enabled" : true,
+		"enabled" : false,
 		"dnspubkey" : "/etc/opi/dnspub.pem"
 	},
 	"filesystem" : {
@@ -65,6 +65,9 @@ read -d '' template << EOF
 	},
 	"setup" : {
 		"conntesthost" : "http://conntest.op-i.me"
+	},
+	"webapps" : {
+		"theme" : "kgp"
 	}
 }
 EOF

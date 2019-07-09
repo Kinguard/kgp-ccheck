@@ -1,3 +1,10 @@
+kgp-ccheck (1.16) vili; urgency=medium
+
+  * Change default theme to kgp
+  * Disable dns in default config
+
+ -- Tor Krill <tor@openproducts.se>  Tue, 09 Jul 2019 09:17:32 +0200
+
 kgp-ccheck (1.15) vili; urgency=medium
 
   * Set backup as disabled upon sysconf creation
