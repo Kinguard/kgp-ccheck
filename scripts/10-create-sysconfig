@@ -49,7 +49,7 @@ read -d '' template << EOF
 	"webcertificate" : {
 		"activecert" : "/etc/opi/web_cert.pem",
 		"activekey" : "/etc/opi/web_key.pem",
-		"defaultcert" : "/etc/opi/opi.cert",
+		"defaultcert" : "/etc/opi/server.cert",
 		"defaultkey" : "/etc/opi/dnspriv.pem"
 	},
 	"backup" : {

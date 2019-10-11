@@ -1,3 +1,10 @@
+kgp-ccheck (1.19) vili; urgency=medium
+
+  * Add migration from op-cert to self signed, if LE not enabled,
+    for server usage
+
+ -- Tor Krill <tor@openproducts.se>  Fri, 11 Oct 2019 11:32:07 +0200
+
 kgp-ccheck (1.18) vili; urgency=medium
 
   * Buster update

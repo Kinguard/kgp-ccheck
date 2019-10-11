@@ -31,7 +31,7 @@ kgp_set()
 kgp_set webcertificate activecert "/etc/opi/web_cert.pem"
 kgp_set webcertificate activekey "/etc/opi/web_key.pem"
 kgp_set webcertificate defaultkey "/etc/opi/dnspriv.pem"
-kgp_set webcertificate defaultcert "/etc/opi/opi.cert"
+kgp_set webcertificate defaultcert "/etc/opi/server.cert"
 
 kgp_set backup devicemountpath "/mnt/usb"
 

@@ -1,0 +1,73 @@
+#! /bin/bash
+
+#
+# This script makes sure that we have a self signed fallback certificate
+# for server usage (Web, imap etc)
+#
+
+#
+# Objective
+#
+# - make sure we have a self signed certificate for server usage
+# - Make sure we have a valid sysconfig with correct default-cert
+#
+
+
+
+CERTFILE="/etc/opi/server.cert"
+KEYFILE="/etc/opi/dnspriv.pem"
+CURCERT=$(kgp-sysinfo -p -c webcertificate -k defaultcert)
+
+WRONGCERT="/etc/opi/opi.cert"
+ACTCERT=$(realpath $(kgp-sysinfo -p -c webcertificate -k activecert))
+ACTKEY=$(realpath $(kgp-sysinfo -p -c webcertificate -k activekey))
+
+HOSTNAME=$(kgp-sysinfo -p -c hostinfo -k hostname)
+DOMAIN=$(kgp-sysinfo -p -c hostinfo -k domain)
+
+
+
+# Make sure we have a certificate
+if [ ! -e ${CERTFILE} ]
+then
+	if [ -z "${HOSTNAME}" ] || [ -z "${DOMAIN}" ]
+	then
+		echo "Hostname or domain missing!"
+		exit 0
+	fi
+
+	if [ -z "${KEYFILE}" ]
+	then
+		echo "Missing private key for certificate ${CERTFILE}"
+		exit 1
+	fi
+
+	echo "Creating new selfsigned cert for ${HOSTNAME}.${DOMAIN}"
+
+openssl req  -x509 -sha512 -key ${KEYFILE} -out ${CERTFILE} -days 3650 2>/dev/null << EOF
+SE
+.
+.
+Kinguard Project
+.
+${HOSTNAME}.${DOMAIN}
+.
+EOF
+
+fi
+
+# Make sure we have correct config
+if [ ${CERTFILE} != ${CURCERT} ]
+then
+	echo "Updating sysinfo to use fallback certificate"
+	kgp-sysinfo -w "${CERTFILE}" -c webcertificate -k defaultcert
+	kgp-sysinfo -w "${KEYFILE}" -c webcertificate -k defaultkey
+fi
+
+# Make sure we have working symlinks as well
+if [ ${ACTCERT} == ${WRONGCERT} ]
+then
+	echo "Updating symlink to new cert"
+	rm -f $(kgp-sysinfo -p -c webcertificate -k activecert)
+	ln -s ${CERTFILE} $(kgp-sysinfo -p -c webcertificate -k activecert)
+fi
