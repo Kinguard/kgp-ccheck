@@ -18,7 +18,7 @@ CERTFILE="/etc/opi/server.cert"
 KEYFILE="/etc/opi/dnspriv.pem"
 CURCERT=$(kgp-sysinfo -p -c webcertificate -k defaultcert)
 
-WRONGCERT="/etc/opi/opi.cert"
+WRONGCERTS="/etc/opi/opi.cert /usr/share/nginx-opi/opi-tmpcert.pem"
 ACTCERT=$(realpath $(kgp-sysinfo -p -c webcertificate -k activecert))
 ACTKEY=$(realpath $(kgp-sysinfo -p -c webcertificate -k activekey))
 
@@ -65,9 +65,12 @@ then
 fi
 
 # Make sure we have working symlinks as well
-if [ ${ACTCERT} == ${WRONGCERT} ]
-then
-	echo "Updating symlink to new cert"
-	rm -f $(kgp-sysinfo -p -c webcertificate -k activecert)
-	ln -s ${CERTFILE} $(kgp-sysinfo -p -c webcertificate -k activecert)
-fi
+for WRONGCERT in $WRONGCERTS
+do
+	if [ ${ACTCERT} == ${WRONGCERT} ]
+	then
+		echo "Updating symlink ${ACTCERT} to new cert"
+		rm -f $(kgp-sysinfo -p -c webcertificate -k activecert)
+		ln -s ${CERTFILE} $(kgp-sysinfo -p -c webcertificate -k activecert)
+	fi
+done
