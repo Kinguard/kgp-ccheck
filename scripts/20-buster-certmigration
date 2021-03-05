@@ -13,6 +13,20 @@
 #
 
 
+#
+# We need kgp-sysinfo to be able to operate.
+# If this is a new install it might not be available
+# we then assume that setup is ok and terminate
+#
+
+KGP=/usr/sbin/kgp-sysinfo
+
+# Check existence
+if [ ! -x $KGP ]
+then
+        echo "Buster certmigration: no kgp-sysinfo executable. Terminating."
+        exit 0
+fi
 
 CERTFILE="/etc/opi/server.cert"
 KEYFILE="/etc/opi/dnspriv.pem"
