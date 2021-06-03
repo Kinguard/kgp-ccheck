@@ -28,7 +28,7 @@ read -d '' template << EOF
 {
 	"dns" : {
 		"availabledomains" : [],
-		"provider": "none",
+		"provider": "OpenProducts",
 		"dnsauthkey" : "/etc/opi/dnspriv.pem",
 		"enabled" : false,
 		"dnspubkey" : "/etc/opi/dnspub.pem"
