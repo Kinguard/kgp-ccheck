@@ -40,7 +40,7 @@ then
 else
 
 	echo "Add KGP device name ${HST}.${DOM} to ${HFILE}"
-	echo "127.0.1.1	${HST} ${HST}.{$DOM}" >> ${HFILE}
+	echo "127.0.1.1	${HST} ${HST}.${DOM}" >> ${HFILE}
 fi
 
 echo "Done"
