@@ -1,3 +1,9 @@
+kgp-ccheck (1.26) vigrid; urgency=medium
+
+  * Bullseye build
+
+ -- Tor Krill <tor@openproducts.se>  Tue, 01 Feb 2022 11:01:11 +0100
+
 kgp-ccheck (1.25) vili; urgency=medium
 
   * Fix typo in hosts fix script
